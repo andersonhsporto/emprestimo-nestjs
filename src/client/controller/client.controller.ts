@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, Post, Put} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, Put} from '@nestjs/common';
 import {ClientService} from "../service/client.service";
 import {ClientDto} from "../dto/client.dto";
 
@@ -18,17 +18,17 @@ export class ClientController {
     }
 
     @Get('/:cpf')
-    async getClientByCpf(@Body('cpf') cpf: string): Promise<ClientDto> {
+    async getClientByCpf(@Param('cpf') cpf: string): Promise<ClientDto> {
         return await this.clientService.getClientByCpf(cpf);
     }
 
     @Delete('/:cpf')
-    async deleteClientByCpf(@Body('cpf') cpf: string): Promise<void> {
+    async deleteClientByCpf(@Param('cpf') cpf: string): Promise<void> {
         return await this.clientService.deleteClientByCpf(cpf);
     }
 
     @Put('/:cpf')
-    async updateClientByCpf(@Body('cpf') cpf: string, @Body() clientDto: ClientDto): Promise<ClientDto> {
+    async updateClientByCpf(@Param('cpf') cpf: string, @Body() clientDto: ClientDto): Promise<ClientDto> {
         return await this.clientService.updateClientByCpf(cpf, clientDto);
     }
 }
